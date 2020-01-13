@@ -4,10 +4,10 @@ import Category from '../../components/category/category';
 
 import './homepage.scss';
 
-const Homepage = () => (
+const HomePage = () => (
     <div className='homepage'>
         <Category />
     </div>
 );
 
-export default Homepage;
+export default HomePage;
