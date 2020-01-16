@@ -5,9 +5,9 @@ import Category from '../../components/category/category';
 import './homepage.scss';
 
 const HomePage = () => (
-    <div className='homepage'>
+    <main className='main homepage'>
         <Category />
-    </div>
+    </main>
 );
 
 export default HomePage;
