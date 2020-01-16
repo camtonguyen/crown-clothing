@@ -3,7 +3,7 @@ import React from 'react';
 import FormInput from '../form-input/form-input';
 import CustomButton from '../custom-button/custom-button';
 
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 import './sign-in.scss';
 
@@ -17,8 +17,16 @@ class SignIn extends React.Component {
         }
     }
 
-    handleSubmit = e => {
+    handleSubmit = async e => {
         e.preventDefault();
+
+        const { email, password } = this.state;
+
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+        } catch(error) {
+            console.error(error)
+        }
         
         this.setState = ({
             email: '',
@@ -26,12 +34,13 @@ class SignIn extends React.Component {
         })
     }
 
-    handleChange = e => {
-        const { value, name } = e.target;
-        this.setState = ({[name]: value})
+    handleChange = event => {
+        const {name, value} = event.target;
+        this.setState({[name]: value})
     }
 
     render() {
+        const { email, password} = this.state;
         return(
             <div className='sign-in'>
                 <h2>I already have an account</h2>
@@ -40,13 +49,13 @@ class SignIn extends React.Component {
                     <FormInput type='email' 
                         name='email' 
                         handleChange={this.handleChange}
-                        value={this.state.value}
+                        value={email}
                         label='Email'
                         required/>
                     <FormInput type='password' 
                         name='password' 
                         handleChange={this.handleChange}
-                        value={this.state.value}
+                        value={password}
                         label='Password'
                         required/>
                     <div className='sign-in__btn-group'>
