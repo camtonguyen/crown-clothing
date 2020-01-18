@@ -18,3 +18,7 @@ a {
     color: black;
 }
 
+button {
+    outline: 0;
+}
+

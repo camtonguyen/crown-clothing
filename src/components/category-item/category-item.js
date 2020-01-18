@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import './category-item.scss';
 
 const CategoryItem = ({title, imageUrl, size, history, match,  linkUrl}) => (
-    <div className={`${size} category__item`} 
+    <div className={`category__item ${size ? 'large' : ''}`} 
          onClick={() => history.push(`${match.url}${linkUrl}`)}>
         <div className='category__item-bg'
             style={{
