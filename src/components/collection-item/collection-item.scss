@@ -4,6 +4,7 @@
     flex-direction: column;
     height: 350px;
     align-items: center;
+    position: relative;
   
     &__img {
       width: 100%;
@@ -11,6 +12,7 @@
       background-size: cover;
       background-position: center;
       margin-bottom: 5px;
+      transition: all .5s cubic-bezier(0.39, 0.575, 0.565, 1);
     }
   
     &__info {
@@ -23,5 +25,25 @@
         &-name {
             margin-bottom: 15px;
         }
+    }
+
+    .custom-button {
+      width: 80%;
+      opacity: .7;
+      position: absolute;
+      top: 255px;
+      display: none;
+    }
+
+    &:hover {
+      .collection-item__img {
+        opacity: .8;
+        cursor: pointer;
+      }
+
+      .custom-button {
+        opacity: .8;
+        display: flex;
+      }
     }
 }
