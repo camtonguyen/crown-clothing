@@ -1,31 +1,27 @@
 import React from 'react';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+
+import { selectCategorySections } from '../../redux/category/category.selectors';
 
 import CategoryItem from '../category-item/category-item';
-import SECTION_DATA from './category.data';
 
 import './category.scss';
 
-class Category extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            sections : SECTION_DATA
+const Category = ({sections}) => (
+    <div className='category'>
+        {
+            sections.map(({id, ...otherSectionProps }) => (
+                <CategoryItem key={id} 
+                            {...otherSectionProps}
+                />
+            ))
         }
-    }
+    </div>
+);
 
-    render() {
-        return(
-            <div className='category'>
-                {
-                    this.state.sections.map(({id, ...otherSectionProps }) => (
-                        <CategoryItem key={id} 
-                                    {...otherSectionProps}
-                        />
-                    ))
-                }
-            </div>
-        )
-    }
-}
+const mapStateToProps = createStructuredSelector({
+    sections: selectCategorySections
+});
 
-export default Category;
+export default connect(mapStateToProps)(Category);
