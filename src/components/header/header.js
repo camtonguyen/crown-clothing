@@ -12,37 +12,42 @@ import CartIcon from '../cart-icon/cart-icon';
 import CartDropdown from '../card-dropdown/card-dropdown';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
-import './header.scss';
+import { 
+    NavBarContainer, 
+    LogoContainer, 
+    NavContainer, 
+    NavItem 
+} from './header.styles';
 
 const Header = ({currentUser, hidden}) => (
-    <header className='header'>
-        <nav className='navbar'>
-            <Link to='/' className='logo-box'>
-                <Logo className='lobo-box__logo' />
-            </Link>
-            <ul className='navbar__nav'>
-                <li className='navbar__nav-item'>
-                    <Link to='/shop' className='navbar__nav-link'>shop</Link>
-                </li>
+    <header>
+        <NavBarContainer>
+            <LogoContainer to='/'>
+                <Logo />
+            </LogoContainer>
+            <NavContainer>
+                <NavItem>
+                    <Link to='/shop'>shop</Link>
+                </NavItem>
                 {
                     currentUser ? 
-                    <li className='navbar__nav-item' onClick={() => auth.signOut()}>sign out</li> 
+                    <NavItem onClick={() => auth.signOut()}>sign out</NavItem> 
                     : 
-                    <li className='navbar__nav-item'>
-                        <Link to='/signin' className='navbar__nav-link'>sign in</Link>
-                    </li>
+                    <NavItem>
+                        <Link to='/signin'>sign in</Link>
+                    </NavItem>
                 }
-                <li className='navbar__nav-item'>
-                    <Link to='/contact' className='navbar__nav-link'>contact</Link>
-                </li>
-                <li className='navbar__nav-item'>
+                <NavItem>
+                    <Link to='/contact'>contact</Link>
+                </NavItem>
+                <NavItem>
                     <CartIcon />
-                </li>
-            </ul>
+                </NavItem>
+            </NavContainer>
             {
                 !hidden && <CartDropdown/>
             }
-        </nav>
+        </NavBarContainer>
     </header>
 );
 

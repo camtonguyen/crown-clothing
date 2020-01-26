@@ -2,12 +2,12 @@ import React from 'react';
 
 import Category from '../../components/category/category';
 
-import './homepage.scss';
+import { HomePageContainer } from './homepage.styles';
 
 const HomePage = () => (
-    <main className='main homepage'>
+    <HomePageContainer>
         <Category />
-    </main>
+    </HomePageContainer>
 );
 
 export default HomePage;

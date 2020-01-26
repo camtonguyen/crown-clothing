@@ -7,45 +7,52 @@ import StripeCheckoutButton from '../../components/stripe-button/stripe-button';
 
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors';
 
-import './checkout.scss';
+import { 
+    CheckoutTable, 
+    CheckoutHeader, 
+    CheckoutBlock, 
+    CheckoutTotal, 
+    CheckoutTestWarning 
+} from './checkout.styles';
 
 const CheckOut = ({cartItems, total}) => (
-    <main className='checkout'>
-        <div className='checkout__table'>
-            <div className='checkout__table-header'>
-                <div className='checkout__table-header__block'>
+    <main>
+        <CheckoutTable>
+            <CheckoutHeader>
+                <CheckoutBlock>
                     <span>Product</span>
-                </div>
-                <div className='checkout__table-header__block'>
+                </CheckoutBlock>
+                <CheckoutBlock>
                     <span>Description</span>
-                </div>
-                <div className='checkout__table-header__block'>
+                </CheckoutBlock>
+                <CheckoutBlock>
                     <span>Quantity</span>
-                </div>
-                <div className='checkout__table-header__block'>
+                </CheckoutBlock>
+                <CheckoutBlock>
                     <span>Price</span>
-                </div>
-                <div className='checkout__table-header__block'>
+                </CheckoutBlock>
+                <CheckoutBlock>
                     <span>Remove</span>
-                </div>
-            </div>
+                </CheckoutBlock>
+            </CheckoutHeader>
             {
                 cartItems.map(cartItem => <CheckoutItem key={cartItem.id} cartItem={cartItem} />)
             }
-            <div className='checkout__total'>
+            <CheckoutTotal>
                 TOTAL: ${total}
-            </div>
-            {total &&
+            </CheckoutTotal>
+            {total ?
                 <Fragment>
-                    <div className='checkout__test-warning'>
+                    <CheckoutTestWarning>
                         *Please use the following test credit card for payments*
                         <br/>
                         4242 4242 4242 4242 - Exp: 01/20 - CVC: 123
-                    </div>
+                    </CheckoutTestWarning>
                     <StripeCheckoutButton price={total} />
                 </Fragment>
+                : null
             }
-        </div>
+        </CheckoutTable>
     </main>
 );
 

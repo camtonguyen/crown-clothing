@@ -1,15 +1,15 @@
 import React from  'react';
 
-import './signin-and-signup.scss';
+import { SignInAndSignUp } from './signin-and-signup.styles';
 
 import SignIn from '../../components/sign-in/sign-in';
 import SignUp from '../../components/sign-up/sign-up';
 
 const SigninAndSignupPage = () => (
-    <main className='main sigin-and-signup'>
+    <SignInAndSignUp>
         <SignIn/>
         <SignUp/>
-    </main>
+    </SignInAndSignUp>
 );
 
 export default SigninAndSignupPage;

@@ -6,10 +6,10 @@ import { selectCategorySections } from '../../redux/category/category.selectors'
 
 import CategoryItem from '../category-item/category-item';
 
-import './category.scss';
+import { CategoryContainer } from './category.styles';
 
 const Category = ({sections}) => (
-    <div className='category'>
+    <CategoryContainer>
         {
             sections.map(({id, ...otherSectionProps }) => (
                 <CategoryItem key={id} 
@@ -17,7 +17,7 @@ const Category = ({sections}) => (
                 />
             ))
         }
-    </div>
+    </CategoryContainer>
 );
 
 const mapStateToProps = createStructuredSelector({
