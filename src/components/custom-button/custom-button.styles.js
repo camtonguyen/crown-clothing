@@ -14,11 +14,11 @@ const DefaultButtonStyles = css`
 const GoogleButtonStyles = css`
     background-color: #4285f4;
     color: white;
+    border: 1px solid #4285f4;
 
     &:hover {
         background-color: white;
         color: #4285f4;
-        border: 1px solid #4285f4;
     }
 `;
 

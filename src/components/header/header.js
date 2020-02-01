@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { auth } from '../../firebase/firebase.utils';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectCardHidden } from '../../redux/cart/cart.selectors';
 
-
 import CartIcon from '../cart-icon/cart-icon';
 import CartDropdown from '../card-dropdown/card-dropdown';
+
+import { signOutStart } from '../../redux/user/user.actions';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { 
@@ -19,7 +19,7 @@ import {
     NavItem 
 } from './header.styles';
 
-const Header = ({currentUser, hidden}) => (
+const Header = ({currentUser, hidden, signOutStart}) => (
     <header>
         <NavBarContainer>
             <LogoContainer to='/'>
@@ -29,17 +29,17 @@ const Header = ({currentUser, hidden}) => (
                 <NavItem>
                     <Link to='/shop'>shop</Link>
                 </NavItem>
+                <NavItem>
+                    <Link to='/contact'>contact</Link>
+                </NavItem>
                 {
                     currentUser ? 
-                    <NavItem onClick={() => auth.signOut()}>sign out</NavItem> 
+                    <NavItem onClick={signOutStart}>sign out</NavItem> 
                     : 
                     <NavItem>
                         <Link to='/signin'>sign in</Link>
                     </NavItem>
                 }
-                <NavItem>
-                    <Link to='/contact'>contact</Link>
-                </NavItem>
                 <NavItem>
                     <CartIcon />
                 </NavItem>
@@ -54,6 +54,13 @@ const Header = ({currentUser, hidden}) => (
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
     hidden: selectCardHidden
-}); 
+});
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+    signOutStart: () => dispatch(signOutStart())
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Header);
